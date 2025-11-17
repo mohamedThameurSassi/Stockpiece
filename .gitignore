@@ -1,52 +1,85 @@
-# Angular specific
-/dist/
-/out-tsc/
-/tmp/
-/coverage/
-/e2e/test-output/
-/.angular/
-.angular/
 
-# Node modules and dependency files
-/node_modules/
-/package-lock.json
-/yarn.lock
 
-# Environment files
-/.env
+# Angular build artifacts
+frontend/dist/
+frontend/out-tsc/
+frontend/tmp/
+frontend/coverage/
+frontend/.angular/
+frontend/.angular-cli.json
 
-# Angular CLI and build artefacts
-/.angular-cli.json
-/.ng/
+# Node modules
+frontend/node_modules/
+frontend/package-lock.json
+frontend/yarn.lock
 
-# TypeScript cache
-*.tsbuildinfo
+# TypeScript
+frontend/*.tsbuildinfo
 
-# Logs
+# Angular IDE
+frontend/.vscode/
+frontend/.idea/
+
+# Maven build artifacts
+server/target/
+server/*/target/
+server/out/
+server/.m2/
+
+# Java compiled files
+server/**/*.class
+server/**/*.jar
+server/**/*.war
+server/**/*.ear
+
+# Maven specific
+server/dependency-reduced-pom.xml
+server/buildNumber.properties
+server/.maven.metadata.xml
+server/pom.xml.bak
+
+# IDE
+server/.vscode/
+server/.idea/
+server/*.iml
+server/*.iws
+server/*.ipr
+server/.classpath
+server/.project
+server/.settings/
+
+# Gradle (if used alongside Maven)
+server/.gradle/
+server/build/
+server/gradle/
+server/gradlew
+server/gradlew.bat
+
+.env
+.env.local
+.env.*.local
+application-local.yml
+application-dev.yml
+
+
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# Frontend specific
-frontend/node_modules/
-frontend/dist/
-frontend/build/
-frontend/public/
-frontend/coverage/
-
-# Server specific
-server/bin/
-server/pkg/
-server/*.exe
-server/*.out
 server/*.log
+frontend/*.log
 
-# IDE and OS files
 .DS_Store
-.vscode/
+Thumbs.db
 *.swp
 *.swo
+*~
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
 
-# Misc
-*.log
+
 *.tmp
+.AppleDouble
+.LSOverride

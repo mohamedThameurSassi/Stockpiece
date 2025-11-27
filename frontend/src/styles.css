@@ -1,3 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+:root{
+    --primary-color: #4ABFFF;
+    --secondary-color: #0916D1;
+    --accent-color: #FFC300;
+    --background-color1: #c19a6bba;
+    --background-color2: #FAF3E0;
+    --text-color: #2B2D42;
+}
+html, body {
+    font-family: 'Cinzel', sans-serif;
+    background-color: var(--background-color2);
+    color: var(--text-color);
 
+}
 @import "tailwindcss";

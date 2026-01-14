@@ -1,16 +1,22 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.5.7'
+	id 'org.springframework.boot' version '3.2.0'
 	id 'io.spring.dependency-management' version '1.1.7'
 }
 
 group = 'com.stockpiece'
-version = '0.0.1-SNAPSHOT'
-description = 'A better StockPiece'
+version = '1.0.0'
+description = 'Stockpiece Backend'
 
 java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
 	}
 }
 
@@ -19,11 +25,45 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
+	// Spring Boot Web
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	
+	// Spring Data JPA
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	
+	// Spring Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	
+	// PostgreSQL Driver
+	runtimeOnly 'org.postgresql:postgresql'
+	
+	// Redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	
+	// Lombok
+	compileOnly 'org.projectlombok:lombok:1.18.38'
+	annotationProcessor 'org.projectlombok:lombok:1.18.38'
+	
+	// Validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	
+	// Flyway for migrations
+	implementation 'org.flywaydb:flyway-core'
+	
+	// Testing
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+// Configure the Spring Boot plugin to exclude Lombok from the final JAR
+springBoot {
+	buildInfo()
+}
+
+tasks.named('bootJar') {
+	archiveFileName = "${project.name}-${project.version}.jar"
 }

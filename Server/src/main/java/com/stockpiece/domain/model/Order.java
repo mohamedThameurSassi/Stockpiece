@@ -1,4 +1,4 @@
-package com.stockpiece.domain.order;
+package com.stockpiece.domain.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -30,6 +30,7 @@ public class Order {
     @Column(nullable = false)
     private Double pricePerShare;
     
+    @Builder.Default
     @Column(nullable = false)
     private String status = "PENDING"; // "PENDING", "FILLED", "CANCELLED"
     

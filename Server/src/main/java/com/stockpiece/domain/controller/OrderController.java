@@ -1,10 +1,14 @@
-package com.stockpiece.domain.order;
+package com.stockpiece.domain.controller;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.stockpiece.domain.model.Order;
+import com.stockpiece.domain.service.OrderService;
+
 import java.util.List;
 
 @RestController

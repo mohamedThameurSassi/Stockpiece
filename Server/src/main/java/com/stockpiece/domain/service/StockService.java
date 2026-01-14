@@ -1,7 +1,11 @@
-package com.stockpiece.domain.stock;
+package com.stockpiece.domain.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import com.stockpiece.domain.model.Stock;
+import com.stockpiece.domain.repository.StockRepository;
+
 import java.util.List;
 
 @Service

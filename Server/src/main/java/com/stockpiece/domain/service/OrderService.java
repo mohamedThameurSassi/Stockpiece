@@ -1,7 +1,11 @@
-package com.stockpiece.domain.order;
+package com.stockpiece.domain.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import com.stockpiece.domain.model.Order;
+import com.stockpiece.domain.repository.OrderRepository;
+
 import java.time.LocalDateTime;
 import java.util.List;
 

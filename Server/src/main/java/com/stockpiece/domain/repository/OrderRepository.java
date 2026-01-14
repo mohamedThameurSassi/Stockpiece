@@ -1,7 +1,10 @@
-package com.stockpiece.domain.order;
+package com.stockpiece.domain.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.stockpiece.domain.model.Order;
+
 import java.util.List;
 
 @Repository

@@ -1,41 +1,48 @@
-package com.stockpiece.domain.user;
+package com.stockpiece.domain.model;
 
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "users")
+@Table(name = "stocks")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
+    @Column(nullable = false)
+    private String characterName;
+    
     @Column(nullable = false, unique = true)
-    private String email;
+    private String ticker;
     
     @Column(nullable = false)
-    private String name;
+    private Double bountyPercentage;
     
     @Column(nullable = false)
-    private Double berryBalance = 10000.0;
+    private Double currentPrice;
     
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
+    private Double previousPrice;
+    
+    private Double ma50;
+    private Double ma200;
+    private Double rsi;
+    
+    @Builder.Default
+    @Column(name = "volume_24h")
+    private Integer volume24h = 0;
+    
+    private String imageUrl;
     
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
     
     @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-        updatedAt = LocalDateTime.now();
-    }
-    
     @PreUpdate
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();

@@ -1,10 +1,10 @@
-<div class="page-content">
-    <app-nav-bar></app-nav-bar>
-    <div class="flex flex-col items-center">
-        <app-separator class="my-[3vh]" title="Trending Stock" height="40vh" width="80vw"></app-separator>
-        <div class="flex gap-[2vw]">
-            <app-separator title="Leader Board" height="40vh" width="39vw"></app-separator>
-            <app-separator title="My Stock" height="40vh" width="39vw"></app-separator>
-        </div>
+<div class="pageHolder">
+    <app-separator class="my-[3vh]" title="Trending Stock" height="40vh" width="80vw"></app-separator>
+    
+    <div class="flex gap-[2vw]">
+        <app-separator title="Leader Board" height="40vh" width="39vw"></app-separator>
+        <app-separator title="My Stock" height="40vh" width="39vw">
+            <app-stock-table [Data]=[]></app-stock-table>
+        </app-separator>
     </div>
 </div>

@@ -1,0 +1,7 @@
+<div class="pageHolder">
+    <input type="text" placeholder="search" [formControl]="searchControl" placeholder="🔎 Search..." 
+    class="searchBar w-[80vw] h-[4vh]"/>
+    <app-separator title="Available stocks" width="80vw" height="80vh">
+        <app-stock-table [Data]=[]></app-stock-table>
+    </app-separator>
+</div>

@@ -1,0 +1,34 @@
+<div class="stock-table-container">
+    <table class="stock-table table-auto w-full border-collapse ">
+        <thead class="bg-(--background-color2) text-(--text-color)">
+            <tr>
+                <th class="text-center">Symbol</th>
+                <th class="text-center">Graph</th>
+                <th class="text-center">Price</th>
+                <th class="text-center">Change</th>
+                <th class="text-center">% Change</th>
+                <th class="text-center"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (item of Data; track item) {
+            <tr app-table-entry [stock]="{
+                symbol: 'Zoro',
+                price: '99.99',
+                change: '+10',
+                percentChange: '+0.15'
+            }"></tr>
+            <tr app-table-entry [stock]="{
+                symbol: 'Luffy',
+                price: '150.00',
+                change: '-5',
+                percentChange: '-0.03'
+            }"></tr>
+            }
+            @empty {
+                <tr><td colspan="6">No stocks found</td></tr>
+            } 
+        </tbody>
+    </table>
+
+</div>

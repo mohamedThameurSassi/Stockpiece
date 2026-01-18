@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { NavBar } from "../../components/nav-bar/nav-bar";
 import { Separator } from '@app/components/separator/separator';
+import { StockTable } from "@app/components/stock-table/stock-table";
 
 
 @Component({
   selector: 'app-home-page',
-  imports: [NavBar, Separator],
+  imports: [Separator, StockTable],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css',
 })

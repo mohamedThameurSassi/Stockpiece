@@ -1,16 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
-:root{
+:root {
     --primary-color: #4ABFFF;
     --secondary-color: #0916D1;
-    --accent-color: #FFC300;
+    --accent-color: #ffc400ba;
     --background-color1: #c19a6bba;
     --background-color2: #FAF3E0;
     --text-color: #2B2D42;
 }
-html, body {
+
+html,
+body {
     font-family: 'Cinzel', sans-serif;
     background-color: var(--background-color2);
     color: var(--text-color);
 
 }
+
+button:not([disabled], .no-style),
+[role="button"]:not([disabled]) {
+    cursor: pointer;
+    background-color: #FFC300;
+    border-radius: 32px;
+    margin: 10px;
+    font-size: larger;
+    font-weight: 600;
+}
+
+.pageHolder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.searchBar {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    background-color: var(--accent-color);
+    border-radius: 2rem;
+    border: 2px solid #ffc400;
+    font-weight: 800;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    color: white;
+    padding-left: 2vw;
+}
+
 @import "tailwindcss";

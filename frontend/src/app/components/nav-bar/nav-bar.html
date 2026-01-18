@@ -1,16 +1,35 @@
 <nav class="flex items-center bg-(--background-color2) h-[7vh]">
-    <img src="/assets/oplogotemp.png" alt="StockPiece Logo" class="nav-logo w-50">
-    <div class="ml-10" >
+    <img routerLink="/home" src="/assets/oplogotemp.png" alt="StockPiece Logo" class="nav-logo w-50">
+    <div class="ml-10">
 
-        <button class="nav-button">Stock</button>
-        <button class="nav-button">Gamble</button>
+        <button class="nav-button" routerLink="/stock">Stock</button>
+        <button class="nav-button" routerLink="gamble">Gamble</button>
         <button class="nav-button">Shop</button>
         <button class="nav-button">Faction</button>
     </div>
-    <div class="flex ml-auto mr-5">
+    <div class="flex ml-auto mr-5 items-center">
 
-        <p class="nav-tokens"> xxx tokens</p>
-        <p class="nav-berry"> xxx Berrys</p>
-        <button class="nav-profile-button">Profile</button>
+        <p class="nav-tokens mr-4"> xxx tokens</p>
+        <p class="nav-berry mr-4"> xxx Berrys</p>
+        <div class="relative">
+
+            <button
+                class="relative w-12 h-12 rounded-full overflow-hidden border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                (click)="toggleMenu()">
+                <img src="assets/zoroPfp.webp" alt="Profil" class="w-full h-full object-cover">
+            </button>
+
+            @if (isMenuOpen) {
+            <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50 py-1">
+                <a href="/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profil</a>
+                <a href="/settings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Paramètres</a>
+                <button (click)="logout()"
+                    class="no-style block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    id="LogoutBtn">
+                    Déconnexion
+                </button>
+            </div>
+            }
+        </div>
     </div>
 </nav>

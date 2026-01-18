@@ -1,0 +1,16 @@
+button{
+    background-color: #FFC300;
+    width: auto;
+    padding: 2px 8px;
+    border-radius: 32px;
+    font-size: small;
+    font-weight: 600;
+}
+.positive{
+    color: #4CAF50;
+    font-weight: 600;
+}
+.negative{
+    color: #F44336;
+    font-weight: 600;
+}

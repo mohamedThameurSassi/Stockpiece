@@ -1,0 +1,12 @@
+<td>{{ stock.symbol }}</td>
+<td>Graph</td>
+<td>{{ stock.price }} B</td>
+<td [ngClass]="{'positive': stock.change >= 0, 'negative': stock.change < 0}">
+    {{ stock.change | number:'1.2-2' }}
+</td>
+<td [ngClass]="{'positive': stock.percentChange >= 0, 'negative': stock.percentChange < 0}" >
+    {{ stock.percentChange | percent:'1.2-2' }}
+</td>
+<td>
+    <button class="bg-(--accent-color)">Buy</button>
+</td>

@@ -11,6 +11,7 @@ import com.stockpiece.domain.model.User;
 import com.stockpiece.domain.service.UserService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
@@ -24,7 +25,7 @@ public class UserController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> getUserById(@PathVariable Integer id) {
+    public ResponseEntity<UserResponse> getUserById(@PathVariable UUID id) {
         return ResponseEntity.ok(userService.getUserById(id));
     }
     
@@ -35,7 +36,7 @@ public class UserController {
     }
     
     @PostMapping("/{id}/balance")
-    public ResponseEntity<UserResponse> updateBalance(@PathVariable Integer id, @RequestBody UpdateBalanceRequest request) {
+    public ResponseEntity<UserResponse> updateBalance(@PathVariable UUID id, @RequestBody UpdateBalanceRequest request) {
         UserResponse user = userService.updateBalance( id, request);
         return ResponseEntity.ok(user);
     }

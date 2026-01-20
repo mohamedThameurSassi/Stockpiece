@@ -13,6 +13,7 @@ import com.stockpiece.domain.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -37,7 +38,7 @@ public class UserService {
         return userMapper.toResponse(savedUser);
     }
     
-    public UserResponse getUserById(Integer id) {
+    public UserResponse getUserById(UUID id) {
         return userRepository.findById(id)
                 .map(userMapper::toResponse)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -49,7 +50,7 @@ public class UserService {
     }
     
     @Transactional
-    public UserResponse updateBalance(Integer user_id, UpdateBalanceRequest request) {
+    public UserResponse updateBalance(UUID user_id, UpdateBalanceRequest request) {
         if (user_id == null) {
             throw new RuntimeException("User ID cannot be null");
         }

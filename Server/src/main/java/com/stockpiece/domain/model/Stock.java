@@ -29,10 +29,16 @@ public class Stock {
     
     private Double previousPrice;
     
+    @Column(name = "circulating_supply")
+    private Long circulatingSupply;
+
     private Double ma50;
     private Double ma200;
     private Double rsi;
     
+    @Column(name = "recent_net_volume")
+    private Integer recentNetVolume;
+
     @Builder.Default
     @Column(name = "volume_24h")
     private Integer volume24h = 0;

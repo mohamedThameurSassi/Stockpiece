@@ -3,6 +3,7 @@ package com.stockpiece.domain.model;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "stock_orders")
@@ -16,7 +17,7 @@ public class Order {
     private Integer id;
     
     @Column(name = "user_id", nullable = false)
-    private Integer userId;
+    private UUID userId;
     
     @Column(name = "stock_id", nullable = false)
     private Integer stockId;

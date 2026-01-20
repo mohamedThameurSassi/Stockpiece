@@ -14,6 +14,7 @@ CREATE TABLE stocks (
     bounty_percentage FLOAT NOT NULL,
     current_price FLOAT NOT NULL,
     previous_price FLOAT,
+    circulating_supply INT,
     ma50 FLOAT,
     ma200 FLOAT,
     rsi FLOAT,

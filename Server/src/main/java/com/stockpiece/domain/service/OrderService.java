@@ -8,13 +8,14 @@ import com.stockpiece.domain.repository.OrderRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
     
-    public Order placeOrder(Integer userId, Integer stockId, Integer quantity, String orderType, Double pricePerShare) {
+    public Order placeOrder(UUID userId, Integer stockId, Integer quantity, String orderType, Double pricePerShare) {
         Order order = Order.builder()
                 .userId(userId)
                 .stockId(stockId)
@@ -26,11 +27,11 @@ public class OrderService {
         return orderRepository.save(order);
     }
     
-    public List<Order> getUserOrders(Integer userId) {
+    public List<Order> getUserOrders(UUID userId) {
         return orderRepository.findByUserId(userId);
     }
     
-    public List<Order> getPendingUserOrders(Integer userId) {
+    public List<Order> getPendingUserOrders(UUID userId) {
         return orderRepository.findByUserIdAndStatus(userId, "PENDING");
     }
     

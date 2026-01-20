@@ -10,6 +10,7 @@ import com.stockpiece.domain.model.Order;
 import com.stockpiece.domain.service.OrderService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/orders")
@@ -30,12 +31,12 @@ public class OrderController {
     }
     
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Order>> getUserOrders(@PathVariable Integer userId) {
+    public ResponseEntity<List<Order>> getUserOrders(@PathVariable UUID userId) {
         return ResponseEntity.ok(orderService.getUserOrders(userId));
     }
     
     @GetMapping("/user/{userId}/pending")
-    public ResponseEntity<List<Order>> getPendingUserOrders(@PathVariable Integer userId) {
+    public ResponseEntity<List<Order>> getPendingUserOrders(@PathVariable UUID userId) {
         return ResponseEntity.ok(orderService.getPendingUserOrders(userId));
     }
     
@@ -57,7 +58,7 @@ public class OrderController {
 
 @Data
 class PlaceOrderRequest {
-    private Integer userId;
+    private UUID userId;
     private Integer stockId;
     private Integer quantity;
     private String orderType;

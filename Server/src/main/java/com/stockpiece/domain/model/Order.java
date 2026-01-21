@@ -1,5 +1,7 @@
 package com.stockpiece.domain.model;
 
+import com.stockpiece.domain.enums.OrderStatus;
+import com.stockpiece.domain.enums.OrderType;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
@@ -13,8 +15,8 @@ import java.util.UUID;
 @Builder
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     
     @Column(name = "user_id", nullable = false)
     private UUID userId;
@@ -22,8 +24,9 @@ public class Order {
     @Column(name = "stock_id", nullable = false)
     private Integer stockId;
     
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String orderType; // "BUY" or "SELL"
+    private OrderType orderType;
     
     @Column(nullable = false)
     private Integer quantity;
@@ -32,8 +35,9 @@ public class Order {
     private Double pricePerShare;
     
     @Builder.Default
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String status = "PENDING"; // "PENDING", "FILLED", "CANCELLED"
+    private OrderStatus status = OrderStatus.PENDING;
     
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;

@@ -46,12 +46,12 @@ public class OrderController {
     }
     
     @PutMapping("/{id}/fill")
-    public ResponseEntity<Order> fillOrder(@PathVariable Integer id) {
+    public ResponseEntity<Order> fillOrder(@PathVariable UUID id) {
         return ResponseEntity.ok(orderService.fillOrder(id));
     }
     
     @PutMapping("/{id}/cancel")
-    public ResponseEntity<Order> cancelOrder(@PathVariable Integer id) {
+    public ResponseEntity<Order> cancelOrder(@PathVariable UUID id) {
         return ResponseEntity.ok(orderService.cancelOrder(id));
     }
 }
@@ -61,6 +61,6 @@ class PlaceOrderRequest {
     private UUID userId;
     private Integer stockId;
     private Integer quantity;
-    private String orderType;
+    private com.stockpiece.domain.enums.OrderType orderType;
     private Double pricePerShare;
 }

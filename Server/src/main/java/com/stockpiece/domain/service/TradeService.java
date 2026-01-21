@@ -7,6 +7,8 @@ import com.stockpiece.domain.repository.*;
 import com.stockpiece.domain.model.Order;
 import com.stockpiece.domain.dtos.TradeRequest;
 import com.stockpiece.domain.model.User;
+import com.stockpiece.domain.enums.OrderStatus;
+import com.stockpiece.domain.enums.OrderType;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -51,16 +53,13 @@ public class TradeService {
         portfolio.setAverageBuyPrice(totalCost / newQuantity);
         portfolio.setQuantity(newQuantity);
         portfolioRepository.save(portfolio);
-
-        sock
-
         Order order = Order.builder()
                 .userId(userId)
                 .stockId(stock.getId())
                 .quantity(tradeRequest.getQuantity())
-                .orderType("MARKET_BUY")
+                .orderType(OrderType.MARKET_BUY)
                 .pricePerShare(stock.getCurrentPrice())
-                .status("FILLED")
+                .status(OrderStatus.FILLED)
                 .filledAt(LocalDateTime.now())
                 .build();
         return orderRepository.save(order);
@@ -99,9 +98,9 @@ public class TradeService {
                 .userId(userId)
                 .stockId(stock.getId())
                 .quantity(tradeRequest.getQuantity())
-                .orderType("MARKET_SELL")
+                .orderType(OrderType.MARKET_SELL)
                 .pricePerShare(stock.getCurrentPrice())
-                .status("FILLED")
+                .status(OrderStatus.FILLED)
                 .filledAt(LocalDateTime.now())
                 .build();
         return orderRepository.save(order);
@@ -112,19 +111,23 @@ public class TradeService {
         Stock stock = stockRepository.findByTicker(tradeRequest.getStockSymbol())
                 .orElseThrow(() -> new RuntimeException("Stock not found"));
         
+        if (tradeRequest.getPrice() == null) {
+            throw new RuntimeException("Price is required for limit orders");
+        }
+        
         Order order = Order.builder()
                 .userId(userId)
                 .stockId(stock.getId())
                 .quantity(tradeRequest.getQuantity())
-                .orderType(tradeRequest.getTradeType())
+                .orderType(tradeRequest.getOrderType())
                 .pricePerShare(tradeRequest.getPrice())
-                .status("PENDING")
+                .status(OrderStatus.PENDING)
                 .build();
         return orderRepository.save(order);
     }
 
     @Transactional
-    public Order cancelOrder(UUID userId, Integer orderId) {
+    public Order cancelOrder(UUID userId, UUID orderId) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
         
@@ -132,11 +135,11 @@ public class TradeService {
             throw new RuntimeException("You are not authorized to cancel this order");
         }
 
-        if (!order.getStatus().equals("PENDING")) {
+        if (order.getStatus() != OrderStatus.PENDING) {
              throw new RuntimeException("Order cannot be cancelled in status: " + order.getStatus());
         }
         
-        order.setStatus("CANCELLED");
+        order.setStatus(OrderStatus.CANCELLED);
         return orderRepository.save(order);
     }
 }

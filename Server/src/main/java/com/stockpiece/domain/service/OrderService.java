@@ -1,5 +1,7 @@
 package com.stockpiece.domain.service;
 
+import com.stockpiece.domain.enums.OrderStatus;
+import com.stockpiece.domain.enums.OrderType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +17,14 @@ import java.util.UUID;
 public class OrderService {
     private final OrderRepository orderRepository;
     
-    public Order placeOrder(UUID userId, Integer stockId, Integer quantity, String orderType, Double pricePerShare) {
+    public Order placeOrder(UUID userId, Integer stockId, Integer quantity, OrderType orderType, Double pricePerShare) {
         Order order = Order.builder()
                 .userId(userId)
                 .stockId(stockId)
                 .quantity(quantity)
                 .orderType(orderType)
                 .pricePerShare(pricePerShare)
-                .status("PENDING")
+                .status(OrderStatus.PENDING)
                 .build();
         return orderRepository.save(order);
     }
@@ -32,25 +34,25 @@ public class OrderService {
     }
     
     public List<Order> getPendingUserOrders(UUID userId) {
-        return orderRepository.findByUserIdAndStatus(userId, "PENDING");
+        return orderRepository.findByUserIdAndStatus(userId, OrderStatus.PENDING);
     }
     
     public List<Order> getStockOrders(Integer stockId) {
         return orderRepository.findByStockId(stockId);
     }
     
-    public Order fillOrder(Integer orderId) {
+    public Order fillOrder(UUID orderId) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
-        order.setStatus("FILLED");
+        order.setStatus(OrderStatus.FILLED);
         order.setFilledAt(LocalDateTime.now());
         return orderRepository.save(order);
     }
     
-    public Order cancelOrder(Integer orderId) {
+    public Order cancelOrder(UUID orderId) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
-        order.setStatus("CANCELLED");
+        order.setStatus(OrderStatus.CANCELLED);
         return orderRepository.save(order);
     }
 }

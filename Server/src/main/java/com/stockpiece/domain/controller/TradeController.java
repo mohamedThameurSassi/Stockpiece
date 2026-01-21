@@ -20,28 +20,26 @@ import java.util.UUID;
 public class TradeController {
     
     private final TradeService tradeService;
+    
     @PostMapping("/execute")
-    public Order executeTrade(
+    public ResponseEntity<Order> executeTrade(
         @RequestParam UUID userId,
         @RequestBody TradeRequest tradeRequest
-    ){
-        if ("LIMIT".equalsIgnoreCase(tradeRequest.getTradeType())){
-            return tradeService.executeLimitOrder(userId, tradeRequest);
-        }
-        if ("MARKET_SELL".equalsIgnoreCase(tradeRequest.getTradeType())){
-            return tradeService.executeMarketSellOrder(userId, tradeRequest);
-        }
-        if ("MARKET_BUY".equalsIgnoreCase(tradeRequest.getTradeType())){
-            return tradeService.executeMarketBuyOrder(userId, tradeRequest);
-        }
-        return null;
+    ) {
+        Order order = switch (tradeRequest.getOrderType()) {
+            case MARKET_BUY -> tradeService.executeMarketBuyOrder(userId, tradeRequest);
+            case MARKET_SELL -> tradeService.executeMarketSellOrder(userId, tradeRequest);
+            case LIMIT_BUY, LIMIT_SELL -> tradeService.executeLimitOrder(userId, tradeRequest);
+        };
+        
+        return ResponseEntity.ok(order);
     }
 
     @DeleteMapping("/{orderId}")
-    public Order cancelOrder(
-            @PathVariable Integer orderId,
+    public ResponseEntity<Order> cancelOrder(
+            @PathVariable UUID orderId,
             @RequestParam UUID userId
     ) {
-        return tradeService.cancelOrder(userId, orderId);
+        return ResponseEntity.ok(tradeService.cancelOrder(userId, orderId));
     }
 }
